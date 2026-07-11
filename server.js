@@ -1,6 +1,7 @@
 import app from "./src/app.js";
 import { connectDB } from "./src/config/db.js";
 import userRouter from "./src/user/user.router.js";
+import globalErrorHandler from "./src/config/globalErrorHandler.js";
 
 // Connect to the DB & Start the server
 connectDB()
@@ -24,3 +25,6 @@ app.get("/", (req, res) => {
   });
 });
 app.use("/api/user", userRouter);
+
+// Global Error Handler
+app.use(globalErrorHandler);
