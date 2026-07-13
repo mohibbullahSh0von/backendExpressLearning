@@ -75,3 +75,25 @@ export const loginUser = async (req, res, next) => {
     return next(error);
   }
 };
+
+export const getUser = async (req, res, next) => {
+  const clientUserId = req.params.userId;
+  const tokenUserId = req.userId;
+  // console.log(
+  //   clientUserId,
+  //   tokenUserId,
+  //   req.headers.authorization.split(" ")[1],
+  // );
+  if (clientUserId === tokenUserId) {
+    try {
+      const user = await User.findOne({ _id: clientUserId });
+      return res.status(200).json({
+        user_details: user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+  const error = new Error("Authorization Failed!!!");
+  next(error);
+};
