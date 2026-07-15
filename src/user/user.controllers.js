@@ -86,7 +86,10 @@ export const getUser = async (req, res, next) => {
   // );
   if (clientUserId === tokenUserId) {
     try {
-      const user = await User.findOne({ _id: clientUserId });
+      const user = await User.findOne(
+        { _id: clientUserId },
+        { password: false },
+      );
       return res.status(200).json({
         user_details: user,
       });

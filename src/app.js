@@ -6,6 +6,8 @@ import helmet from "helmet";
 const app = express();
 
 // Global Middlewares
+// For static assests
+app.use(express.static("public"));
 // For cross origin resource sharing
 app.use(cors());
 // For security
